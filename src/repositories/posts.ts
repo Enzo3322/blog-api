@@ -3,7 +3,13 @@ const prisma = new PrismaClient();
 
 export const PostRepository = {
   async getAllPosts() {
-    return prisma.post.findMany();
+    return prisma.post.findMany({
+      select: {
+        title: true,
+        id: true,
+        createdAt: true
+      },
+    });
   },
 
   async getPostById(id: string) {
@@ -12,7 +18,7 @@ export const PostRepository = {
     });
   },
 
-  async createPost({title, content} : {title: string, content: string}) {
+  async createPost({ title, content }: { title: string, content: string }) {
     return prisma.post.create({
       data: {
         title,
@@ -21,7 +27,7 @@ export const PostRepository = {
     });
   },
 
-  async updatePost({id, title, content}:{id: string, title:string, content:string} ) {
+  async updatePost({ id, title, content }: { id: string, title: string, content: string }) {
     return prisma.post.update({
       where: { id },
       data: {
