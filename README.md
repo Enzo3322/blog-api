@@ -1,23 +1,25 @@
-# Getting Started with [Fastify-CLI](https://www.npmjs.com/package/fastify-cli)
-This project was bootstrapped with Fastify-CLI.
+# Getting Started with BLOG-API
 
-## Available Scripts
+## Create post
+ curl --request POST \
+  --url http://localhost:3000/posts \
+  --header 'Content-Type: application/json' \
+  --data '{"title":"Novo Post","content":"Conteúdo do novo post"}'
 
-In the project directory, you can run:
+## Delete post by id
+curl --request DELETE \
+  --url http://localhost:3000/posts/42c5f7d3-03d0-47dc-ad3e-62505c70597a
 
-### `npm run dev`
+## Update post by id
+curl --request PUT \
+  --url http://localhost:3000/posts/1 \
+  --header 'Content-Type: application/json' \
+  --data '{"title":"Título Atualizado","content":"Conteúdo atualizado","ref":"nova-ref","labels":["label1","label2"],"related":["related1","related2"]}'
 
-To start the app in dev mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Get post by id
+curl --request GET \
+  --url http://localhost:3000/posts/42c5f7d3-03d0-47dc-ad3e-62505c70597a
 
-### `npm start`
-
-For production mode
-
-### `npm run test`
-
-Run the test cases.
-
-## Learn More
-
-To learn Fastify, check out the [Fastify documentation](https://www.fastify.io/docs/latest/).
+## Get posts
+curl --request GET \
+  --url http://localhost:3000/posts
