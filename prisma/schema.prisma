@@ -8,11 +8,13 @@ datasource db {
 }
 
 model Post {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  content   String
-  labels    String[]
-  related   String[]
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String
+  description String
+  content     String
+  category    String
+  labels      String[]
+  related     String[]
 }

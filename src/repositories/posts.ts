@@ -1,13 +1,20 @@
+import { Post } from "@prisma/client";
+import { CreatePostProps } from "../types/post";
+
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 export const PostRepository = {
-  async getAllPosts() {
+  async getAllPosts(): Promise<Post[] | []> {
     return prisma.post.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      },
       select: {
         title: true,
         id: true,
-        createdAt: true
+        createdAt: true,
+        description: true
       },
     });
   },
@@ -18,12 +25,9 @@ export const PostRepository = {
     });
   },
 
-  async createPost({ title, content }: { title: string, content: string }) {
+  async createPost(data: CreatePostProps) {
     return prisma.post.create({
-      data: {
-        title,
-        content,
-      },
+      data,
     });
   },
 
